@@ -19,7 +19,7 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 stages:
-- stage: 'build dotnet app'
+- stage: 'build_dotnet_app'
   displayName: 'build dotnet app'
   jobs:
     - job: 'build_netapp'
