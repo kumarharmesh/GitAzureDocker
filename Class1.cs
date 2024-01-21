@@ -6,4 +6,8 @@ public class Class1
        {
          return DateTime.Now.ToString(format);
        }
+       public string Message()
+       {
+         return "Hello World";
+       }
 }
