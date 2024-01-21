@@ -53,13 +53,10 @@ stages:
       inputs:
         buildType: 'current'
         artifactName: 'bin'
-        targetPath: '$(Pipeline.Workspace)/bin'
+        targetPath: '$(Pipeline.Workspace)'
           
     - script: |
-        'dir $(Pipeline.Workspace)/a'
-        'dir $(Pipeline.Workspace)/b'
-        'dir $(Pipeline.Workspace)/bin'
-        'dir $(Pipeline.Workspace)/s'
+        'dir $(Pipeline.Workspace)'
          displayName: '--------list contents--------'    
 
     # - task: Docker@2
