@@ -28,7 +28,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     
-    - script: 'cmd dir $(Build.SourcesDirectory)'
+    - script: 'dir $(Build.SourcesDirectory)'
     - task: PublishBuildArtifacts@1
 
     - task: Docker@2
