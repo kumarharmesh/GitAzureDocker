@@ -55,9 +55,8 @@ stages:
         artifactName: 'bin'
         targetPath: '$(Pipeline.Workspace)'
           
-    - script: |
-        'dir $(Pipeline.Workspace)'
-         displayName: '--------list contents--------'    
+    - script: 'dir $(Pipeline.Workspace)'
+      displayName: '--------list contents--------'    
 
     # - task: Docker@2
     #   displayName: Build and push an image to container registry
