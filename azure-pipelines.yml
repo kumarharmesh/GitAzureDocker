@@ -55,7 +55,7 @@ stages:
         artifactName: 'bin'
         targetPath: '$(Pipeline.Workspace)'
           
-    - script: 'dir $(Pipeline.Workspace)/bin'
+    - script: 'dir $(Pipeline.Workspace)/Release'
       displayName: '--------list contents--------'    
 
     # - task: Docker@2
