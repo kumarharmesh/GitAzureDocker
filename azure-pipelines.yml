@@ -33,6 +33,13 @@ stages:
     
       - script: 'dir $(Build.SourcesDirectory)/bin'
         displayName: '--------list contents--------'
+      - task: PublishBuildArtifacts@1
+        displayName: 'download artifacts'
+        inputs:
+         PathtoPublish: '$(Build.SourcesDirectory)/bin'
+         artifactName: bin
+         publishLocation: Container
+
 - stage: Build
   displayName: Build and push stage
   jobs:
@@ -42,12 +49,8 @@ stages:
       vmImage: $(vmImageName)
     steps:
        
-    - task: PublishBuildArtifacts@1
-      displayName: 'download artifacts'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/bin'
-        artifactName: bin
-        publishLocation: Container
+    # - task: DownloadPipelineArtifact@2
+    #   displayName: 'download build artifacts for docker push'
         
           
     - script: 'dir $(Build.SourcesDirectory)'
