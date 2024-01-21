@@ -45,7 +45,7 @@ stages:
     - task: PublishBuildArtifacts@1
       displayName: 'download artifacts'
       inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)'
+        PathtoPublish: '$(Build.SourcesDirectory)/bin'
         artifactName: bin
         publishLocation: Container
         
