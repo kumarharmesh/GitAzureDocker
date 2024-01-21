@@ -22,7 +22,7 @@ stages:
 - stage: 'build dotnet app'
   displayName: 'build dotnet app'
   jobs:
-    - job: 'build-netapp'
+    - job: 'build_netapp'
       displayName: 'build netapp'
       steps:
       - task: DotNetCoreCLI@2
