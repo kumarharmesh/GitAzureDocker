@@ -42,13 +42,21 @@ stages:
       vmImage: $(vmImageName)
     steps:
        
-    
-    - task: Docker@2
-      displayName: Build and push an image to container registry
+    - task: PublishBuildArtifacts@1
+      displayName: 'download artifacts'
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        PathtoPublish: '$(Build.SourcesDirectory)/bin'
+        artifactName: bin
+          
+    - script: 'dir $(Build.SourcesDirectory)/bin'
+      displayName: '--------list contents--------'    
+
+    # - task: Docker@2
+    #   displayName: Build and push an image to container registry
+    #   inputs:
+    #     command: buildAndPush
+    #     repository: $(imageRepository)
+    #     dockerfile: $(dockerfilePath)
+    #     containerRegistry: $(dockerRegistryServiceConnection)
+    #     tags: |
+    #       $(tag)
