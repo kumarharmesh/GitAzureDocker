@@ -45,10 +45,12 @@ stages:
     - task: PublishBuildArtifacts@1
       displayName: 'download artifacts'
       inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/bin'
+        PathtoPublish: '$(Build.SourcesDirectory)'
         artifactName: bin
+        publishLocation: Container
+        
           
-    - script: 'dir $(Build.SourcesDirectory)/bin'
+    - script: 'dir $(Build.SourcesDirectory)'
       displayName: '--------list contents--------'    
 
     # - task: Docker@2
