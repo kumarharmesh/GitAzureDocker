@@ -19,16 +19,6 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 stages:
-- stage: 'buildnetapp'
-  displayName: 'generate artifacts' 
-  jobs:
-  - job: 'buildapp'
-    steps:
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: build
-        arguments: '-c Release'
-
 - stage: Build
   displayName: Build and push stage
   jobs:
@@ -37,6 +27,9 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    
+    - task: PublishBuildArtifacts@1
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
