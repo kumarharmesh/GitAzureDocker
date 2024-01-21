@@ -53,7 +53,7 @@ stages:
     #   displayName: 'download build artifacts for docker push'
         
           
-    - script: 'dir $(Build.SourcesDirectory)'
+    - script: 'dir $(Build.SourcesDirectory)/bin'
       displayName: '--------list contents--------'    
 
     # - task: Docker@2
