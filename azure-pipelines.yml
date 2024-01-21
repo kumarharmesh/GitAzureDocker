@@ -19,7 +19,7 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 stages:
-- stage: 'build netapp'
+- stage: 'buildnetapp'
   displayName: 'generate artifacts' 
   jobs:
   - job: 'buildapp'
