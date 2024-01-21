@@ -19,16 +19,16 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 stages:
-- stage: build
+- stage: 'build .net'
   displayName: 'generate artifacts' 
   jobs:
-  - job: build
+  - job: 'buildapp'
     steps:
     - task: DotNetCoreCLI@2
       inputs:
         command: build
         arguments: '-c Release'
-        
+
 - stage: Build
   displayName: Build and push stage
   jobs:
