@@ -13,7 +13,7 @@ stages:
           arguments: '-c Release -o $(Build.ArtifactStagingDirectory)'
       
       - script: |
-         echo '-----------------build files--------------------'
-         'dir $(Build.ArtifactStagingDirectory)'
+         echo '-------Displaying contents of work dir-------'
+         echo 'dir $(Build.SourcesDirectory)'
          
 
