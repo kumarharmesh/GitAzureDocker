@@ -1,83 +1,19 @@
-# Docker
-# Build and push an image to Azure Container Registry
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - master
 
-resources:
-- repo: self
-
-variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'ff65db28-1d5e-43bd-bb20-e33562371968'
-  imageRepository: 'pluto'
-  containerRegistry: 'imageregistryhk.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
-
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
 stages:
-- stage: 'build_dotnet_app'
-  displayName: 'build dotnet app'
-  jobs:
-    - job: 'build_netapp'
-      displayName: 'build netapp'
+  - stage: 'here we are building the app'
+    jobs:
+    - job: 'build-mvc-job'
       steps:
       - task: DotNetCoreCLI@2
-        displayName: 'build app'
+        displayName: 'now building'
         inputs:
-         command: build
-         arguments: '-c Release'
-    
-      - script: 'dir $(Build.SourcesDirectory)'
-        displayName: '--------list contents--------'
-      - task: PublishBuildArtifacts@1
-        displayName: 'download artifacts'
-        inputs:
-         PathtoPublish: '$(Build.SourcesDirectory)/bin'
-         artifactName: bin
-         publishLocation: Container
+          command: build
+          arguments: '-c Release -o $(Build.ArtifactStagingDirectory)'
       
-      - task: PublishBuildArtifacts@1
-        displayName: 'download dockerfile'
-        inputs:
-         PathtoPublish: '$(Build.SourcesDirectory)/Dockerfile'
-         artifactName: doc
-         publishLocation: Container
+      - script: |
+         echo '-----------------build files--------------------'
+         echo'dir $(Build.ArtifactStagingDirectory)'
+         
 
-- stage: Build
-  displayName: Build and push stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: DownloadPipelineArtifact@2
-      displayName: 'download build artifacts for docker push'
-      inputs:
-        buildType: 'current'
-        artifactName: 'bin'
-        targetPath: '$(Pipeline.Workspace)/bin'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'download dockerfile for docker push'
-      inputs:
-        buildType: 'current'
-        artifactName: 'doc'
-        targetPath: '$(Pipeline.Workspace)'
-              
-    - script: 'dir $(Pipeline.Workspace)/bin'
-      displayName: '--------list contents--------'    
-
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: '$(Pipeline.Workspace)/Dockerfile'
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
