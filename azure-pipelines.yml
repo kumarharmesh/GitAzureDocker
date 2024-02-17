@@ -4,7 +4,7 @@ trigger:
 stages:
   - stage: 'here we are building the app'
     jobs:
-    - job: 'build-mvc-job'
+    - job: 'build_mvc_job'
       steps:
       - task: DotNetCoreCLI@2
         displayName: 'now building'
