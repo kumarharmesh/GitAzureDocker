@@ -2,7 +2,7 @@ trigger:
 - master
 
 stages:
-  - stage: 'here we are building the app'
+  - stage: 'here_we_are_building_the_app'
     jobs:
     - job: 'build_mvc_job'
       steps:
